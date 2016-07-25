@@ -18,22 +18,23 @@ function Column(id, name) {
 		});
 		
 		columnAddCard.click(function(event) {
-			var cardName = prompt("Wpisz nazwę karty");
-			event.preventDefault();
-			$.ajax({
-			    url: baseUrl + '/card',
-			    method: 'POST',
-			    data: {
-			    name: cardName,
-			    btn_group: barcolor,
-			    bootcamp_kanban_column_id: self.id
-			    },
-			    success: function(response) {
-			        var card = new Card(response.id, cardName, btn_group);
-			        self.createCard(card);
-			    }
-			});
-		});
+            var cardName = prompt("Wpisz nazwę karty");
+            var barcolor = 'red';
+            event.preventDefault();
+            $.ajax({
+                url: baseUrl + '/card',
+                method: 'POST',
+                data: {
+                name: cardName,
+                btn_group: 'red',
+                bootcamp_kanban_column_id: self.id
+                },
+                success: function(response) {
+                    var card = new Card(response.id, cardName, this.btn_group);
+                    self.createCard(card);
+                }
+            });
+        });
 			
 			// KONSTRUOWANIE ELEMENTU KOLUMNY
 		column.append(columnTitle)
